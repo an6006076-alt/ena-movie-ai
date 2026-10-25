@@ -1,449 +1,326 @@
 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#101010">
-<title>ENA | Entertainment Universe</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#090909">
+<title>ENA AI | The future starts with ENA</title>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style>
-:root{--bg:#101010;--panel:#1b1a18;--gold:#d8b46a;--text:#f4eee3;--muted:#aaa194;--border:#443a29}
+:root{--gold:#d9b56d;--bg:#090909;--panel:#151515;--muted:#aaa;--line:#373126}
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--text);font-family:Georgia,"Times New Roman",serif;font-style:italic}
-button,input,select,textarea{font:inherit;font-style:italic}
-button{cursor:pointer;border:1px solid var(--border);background:#24221e;color:var(--text);padding:11px 14px;border-radius:8px}
-button:hover{border-color:var(--gold)}
-.primary{background:var(--gold);color:#17130b;font-weight:bold;border-color:var(--gold)}
-header{padding:18px 5%;display:flex;justify-content:space-between;align-items:center;gap:15px;flex-wrap:wrap;border-bottom:1px solid var(--border);position:sticky;top:0;background:#101010f5;z-index:5}
-.logo{font-size:30px;font-weight:bold;letter-spacing:5px;color:var(--gold)}
-.logo small{display:block;font-size:10px;letter-spacing:3px;color:var(--muted)}
-nav{display:flex;gap:7px;flex-wrap:wrap}
-main{max-width:1400px;margin:auto;padding:25px 5% 65px}
-.hero{padding:40px 25px;border:1px solid #66502b;border-radius:16px;background:radial-gradient(ellipse at 90% 10%,#70502055,transparent 45%),linear-gradient(130deg,#241d12,#101010 70%)}
-.eyebrow{color:var(--gold);font-size:11px;letter-spacing:3px}
-h1{font-size:clamp(36px,6vw,62px);line-height:1.05;margin:15px 0}
-h2{font-size:24px}
-.muted,.desc{color:var(--muted)}
-.search{display:flex;gap:9px;margin-top:20px;max-width:800px}
-input,select,textarea{background:#111;color:var(--text);border:1px solid var(--border);border-radius:8px;padding:12px;width:100%;min-width:0}
-.search input{flex:1}
-.filters{display:flex;gap:10px;flex-wrap:wrap;margin:15px 0}
-.filters select{max-width:240px}
-.section{margin-top:35px}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(185px,1fr));gap:16px}
-.card{background:var(--panel);border:1px solid var(--border);border-radius:12px;overflow:hidden;display:flex;flex-direction:column}
-.poster{width:100%;aspect-ratio:2/3;object-fit:cover;background:#29251e}
-.placeholder{aspect-ratio:2/3;display:grid;place-items:center;text-align:center;color:var(--gold);font-size:23px;background:linear-gradient(140deg,#40321c,#151515)}
-.cardbody{padding:12px;display:flex;flex-direction:column;gap:9px;flex:1}
-.card h3{font-size:17px;margin:0}
-.tag{font-size:11px;color:var(--gold);text-transform:uppercase}
-.desc{font-size:12px;line-height:1.5}
-.actions{display:flex;gap:6px;flex-wrap:wrap;margin-top:auto}
-.actions button{font-size:12px;padding:8px}
-.pill{font-size:11px;color:var(--gold);border:1px solid var(--border);border-radius:20px;padding:5px 8px}
-.panel{background:var(--panel);border:1px solid var(--border);padding:18px;border-radius:12px}
-.hidden{display:none!important}
-#status{white-space:pre-wrap;color:var(--gold);margin:14px 0}
-.chatbox{height:370px;overflow:auto;padding:12px;background:#13120f;border:1px solid var(--border);border-radius:10px;margin:15px 0}
-.message{padding:12px 15px;line-height:1.75;white-space:pre-wrap;overflow-wrap:anywhere;max-width:92%;margin:10px 0;border-radius:13px}
-.message.ena{background:#27231b;border:1px solid #514127;border-radius:13px 13px 13px 3px}
-.message.user{background:#49391e;margin-left:auto;border-radius:13px 13px 3px 13px}
-.chatinput{display:flex;gap:8px}
-.chatinput input{flex:1}
-.item{padding:13px;border:1px solid var(--border);border-radius:9px;margin:10px 0}
-.item h3{margin:0 0 8px}
-dialog{background:var(--panel);color:var(--text);border:1px solid var(--gold);border-radius:14px;width:min(760px,94vw);max-height:85vh;overflow:auto;padding:22px}
-dialog::backdrop{background:#000d}
-.episode{border-bottom:1px solid var(--border);padding:12px 0}
-a{color:var(--gold)}
-footer{text-align:center;padding:28px;color:var(--muted);font-size:12px;border-top:1px solid var(--border)}
-@media(max-width:600px){header{position:static}main{padding:18px 4% 45px}.hero{padding:24px 16px}.search{flex-direction:column}.filters select{max-width:none;flex:1}.grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.cardbody{padding:9px}.chatbox{height:330px}}
+body{margin:0;background:radial-gradient(ellipse at top,#292116,var(--bg) 65%);color:#f5f1e8;font-family:Georgia,serif;min-height:100vh}
+header{position:sticky;top:0;z-index:5;background:#090909f2;border-bottom:1px solid var(--line);padding:15px 4%;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.logo{font-size:27px;letter-spacing:5px;font-weight:bold;color:var(--gold)}
+nav{display:flex;gap:6px;flex-wrap:wrap}
+button{background:#211e18;color:#eee;border:1px solid var(--line);padding:10px 13px;border-radius:8px;cursor:pointer;font:inherit}
+button:hover{border-color:var(--gold);color:var(--gold)}
+.primary{background:var(--gold);color:#111;border-color:var(--gold);font-weight:bold}
+main{width:min(1000px,92%);margin:28px auto}
+.view{display:none}.view.active{display:block}
+.hero{text-align:center;padding:65px 10px}
+.hero h1{font-size:clamp(42px,8vw,78px);color:var(--gold);margin:14px 0}
+.subtitle,.muted{color:var(--muted);line-height:1.65}
+.panel{background:#151515ee;border:1px solid var(--line);border-radius:15px;padding:20px;margin:16px 0}
+input,textarea,select{width:100%;background:#0c0c0c;color:#fff;border:1px solid #484239;border-radius:8px;padding:12px;font:inherit}
+textarea{min-height:100px;resize:vertical}
+.field{margin:14px 0}label{display:block;margin-bottom:7px;color:var(--gold)}
+.row{display:flex;gap:9px;flex-wrap:wrap}.row>*{flex:1;min-width:125px}
+.status{white-space:pre-wrap;color:var(--gold)}
+#messages{display:flex;flex-direction:column;gap:12px;margin:20px 0}
+.bubble{white-space:pre-wrap;overflow-wrap:anywhere;line-height:1.6;background:#201d18;border:1px solid var(--line);padding:14px;border-radius:12px}
+.bubble.user{border-color:#8b6c39}
+.movie{display:flex;gap:14px;padding:14px;margin:14px 0;background:#171614;border:1px solid var(--line);border-radius:12px}
+.movie img{width:100px;height:150px;object-fit:cover;background:#222;border-radius:6px}
+.movie h3{color:var(--gold);margin-top:0}.movie p{line-height:1.5}
+a{color:var(--gold)}footer{text-align:center;color:var(--muted);padding:25px;font-size:13px}
+hr{border:0;border-top:1px solid var(--line);margin:22px 0}
+@media(max-width:500px){header{align-items:flex-start;flex-direction:column}.movie img{width:78px;height:118px}.hero{padding:40px 3px}}
 </style>
 </head>
 <body>
 <header>
-  <div class="logo">ENA<small>YOUR ENTERTAINMENT UNIVERSE</small></div>
+  <div class="logo">ENA AI</div>
   <nav>
-    <button onclick="section('discover')">Discover</button>
-    <button onclick="section('chat')">Chat with ENA</button>
-    <button onclick="section('watchlist')">Watchlist</button>
-    <button onclick="section('account')">Account</button>
+    <button onclick="page('welcome')">Home</button>
+    <button onclick="page('chat')">AI Chat</button>
+    <button onclick="page('discover')">Discover</button>
+    <button onclick="page('watchlist')">Watchlist</button>
+    <button onclick="page('feedback')">Feedback</button>
+    <button onclick="page('settings')">Settings</button>
+    <button onclick="page('account')">Account</button>
   </nav>
 </header>
-
 <main>
-<section class="hero">
-  <div class="eyebrow">A WORLD OF STORIES AWAITS</div>
-  <h1>Find your next<br><span style="color:var(--gold)">great story.</span></h1>
-  <p class="muted">Movies, series, anime, documentaries, animation and cartoons.</p>
-  <div class="search">
-    <input id="query" placeholder="Search Game of Thrones, anime, documentaries..." onkeydown="if(event.key==='Enter')searchTitles()">
-    <button class="primary" onclick="searchTitles()">Search</button>
+<section id="welcome" class="view active">
+ <div class="hero">
+  <p class="subtitle">A NEW ERA OF ENTERTAINMENT DISCOVERY</p>
+  <h1>The future starts with ENA.</h1>
+  <p class="subtitle">Movies. Series. Anime. Documentaries.<br>Your next story begins with a conversation.</p>
+  <button class="primary" onclick="page('chat')">Discover your next favourite</button>
+  <button onclick="page('account')">Create account</button>
+ </div>
+ <div class="panel"><h2>Made for your mood</h2><p class="subtitle">Tell ENA what you enjoy, explore title information and ratings, save a watchlist and share feedback to help improve the experience.</p></div>
+</section>
+
+<section id="account" class="view">
+ <h2>Your ENA account</h2>
+ <div class="panel">
+  <div class="field"><label for="email">Email</label><input id="email" type="email" autocomplete="email" placeholder="you@example.com"></div>
+  <div class="field"><label for="password">Password</label><input id="password" type="password" autocomplete="current-password" placeholder="At least 8 characters"></div>
+  <div class="row"><button class="primary" onclick="register()">Register</button><button onclick="login()">Sign in</button><button onclick="logout()">Sign out</button></div>
+  <hr><p>Or sign in with a provider you've configured:</p>
+  <div class="row"><button onclick="social('google')">Google</button><button onclick="social('apple')">Apple</button><button onclick="social('facebook')">Facebook</button></div>
+  <p id="authStatus" class="status" role="status"></p><p id="userStatus" class="muted">Checking account...</p>
+ </div>
+</section>
+
+<section id="chat" class="view">
+ <h2>Chat with ENA</h2><p class="subtitle">Describe your mood, genre, language or the kind of story you want.</p>
+ <div class="panel">
+  <div class="row">
+   <button onclick="promptFor('Recommend a dark fantasy series with political battles.')">Dark fantasy</button>
+   <button onclick="promptFor('Find a clever mystery with a surprising ending.')">Mystery</button>
+   <button onclick="promptFor('Recommend family-friendly animation.')">Animation</button>
   </div>
+  <div id="messages" aria-live="polite"><div class="bubble">Welcome to ENA. What are you in the mood to watch?</div></div>
+  <form id="chatForm"><div class="field"><label for="prompt">Your message</label><textarea id="prompt" required maxlength="2000" placeholder="I want a suspenseful series..."></textarea></div><div class="row"><button class="primary">Send to ENA</button><button type="button" onclick="stopVoice()">Stop reading</button></div></form>
+  <p id="chatStatus" class="status" role="status"></p>
+ </div>
 </section>
 
-<div class="filters">
-  <select id="category">
-    <option value="all">All categories</option>
-    <option value="series">TV series</option>
-    <option value="movie">Movies</option>
-    <option value="anime">Anime</option>
-    <option value="animation">Animation and cartoons</option>
-    <option value="documentary">Documentaries</option>
-  </select>
-  <select id="sort">
-    <option value="relevance">Best match</option>
-    <option value="year">Newest year first</option>
-    <option value="rating">Highest available rating</option>
-  </select>
-  <button onclick="trending()">Explore TV shows</button>
-</div>
-<div id="status">Welcome. What are you in the mood to watch?</div>
-
-<section id="discover" class="section">
-  <h2>Explore stories</h2>
-  <div id="results" class="grid"></div>
+<section id="discover" class="view">
+ <h2>Discover movies and series</h2>
+ <div class="panel">
+  <form id="searchForm"><div class="field"><label for="query">Search title</label><input id="query" required maxlength="100" placeholder="e.g. Interstellar"></div><button class="primary">Search</button></form>
+  <p id="searchStatus" class="status" role="status"></p><div id="results"></div>
+  <p class="muted">Ratings are displayed only when returned by the configured data provider. Scores can be unavailable.</p>
+ </div>
 </section>
 
-<section id="chat" class="section hidden">
-  <div class="panel">
-    <div class="eyebrow">YOUR PERSONAL ENTERTAINMENT COMPANION</div>
-    <h2>Let's talk.</h2>
-    <p class="muted">Tell me about your day, your mood or the kind of story you love.</p>
-    <div id="chatbox" class="chatbox" aria-live="polite">
-      <div class="message ena">Hey! 😊 I'm ENA. It's lovely to have you here. How are you doing today? Are we chatting, finding something to watch, or a little of both?</div>
-    </div>
-    <div class="chatinput">
-      <input id="chatInput" placeholder="Write a message..." onkeydown="if(event.key==='Enter')sendChat()">
-      <button class="primary" id="sendButton" onclick="sendChat()">Send</button>
-    </div>
-    <p class="muted">Conversation context is kept while this page remains open.</p>
-  </div>
+<section id="watchlist" class="view">
+ <h2>My watchlist</h2><p class="subtitle">Keep the stories you want to watch next.</p>
+ <div class="panel"><div id="savedTitles"></div><button onclick="clearWatchlist()">Clear watchlist</button></div>
 </section>
 
-<section id="watchlist" class="section hidden">
-  <h2>My watchlist</h2>
-  <p class="muted">Your saved stories are kept in this browser.</p>
-  <div id="watchItems"></div>
+<section id="feedback" class="view">
+ <h2>Help shape ENA</h2><p class="subtitle">Found a bug? Have an idea? Tell us what should improve.</p>
+ <div class="panel">
+  <form id="feedbackForm">
+   <div class="field"><label for="feedbackType">Feedback type</label><select id="feedbackType"><option>Suggestion</option><option>Bug report</option><option>Rating correction</option><option>Design feedback</option><option>Other</option></select></div>
+   <div class="field"><label for="feedbackRating">How was your experience?</label><select id="feedbackRating"><option value="5">5 / 5, Excellent</option><option value="4">4 / 5, Good</option><option value="3">3 / 5, Okay</option><option value="2">2 / 5, Poor</option><option value="1">1 / 5, Very poor</option></select></div>
+   <div class="field"><label for="feedbackText">Your feedback</label><textarea id="feedbackText" required minlength="5" maxlength="3000" placeholder="Tell us what happened or what you'd like to see..."></textarea></div>
+   <button class="primary">Send feedback</button>
+  </form>
+  <p id="feedbackStatus" class="status" role="status"></p>
+  <p class="muted">Feedback is saved to Supabase when configured, or offered as a prepared email if you set a feedback email address below.</p>
+ </div>
 </section>
 
-<section id="account" class="section hidden">
-  <div class="panel" style="max-width:500px;margin:auto">
-    <h2>Your ENA account</h2>
-    <p class="muted">Connect Supabase in the code to enable account registration and sign-in.</p>
-    <div style="display:grid;gap:12px">
-      <input id="email" type="email" placeholder="Email address">
-      <input id="password" type="password" placeholder="Password">
-      <button class="primary" onclick="signup()">Create account</button>
-      <button onclick="signin()">Sign in</button>
-      <button onclick="signout()">Sign out</button>
-      <div id="accountStatus" class="muted"></div>
-    </div>
-  </div>
+<section id="settings" class="view">
+ <h2>Settings</h2>
+ <div class="panel">
+  <div class="field"><label for="voice">Read-aloud voice</label><select id="voice"></select></div>
+  <div class="field"><label for="speed">Voice speed</label><select id="speed"><option value=".8">Slow</option><option value="1" selected>Normal</option><option value="1.2">Fast</option><option value="1.4">Very fast</option></select></div>
+  <label><input id="autoRead" type="checkbox" style="width:auto"> Automatically read AI replies aloud</label>
+  <label><input id="reducedMotion" type="checkbox" style="width:auto"> Reduce animated scrolling</label>
+  <div class="field"><label for="feedbackEmail">Feedback email (optional)</label><input id="feedbackEmail" type="email" placeholder="your-support@example.com"></div>
+  <button class="primary" onclick="saveSettings()">Save settings</button><button onclick="speak('Welcome to ENA AI. The future starts with ENA.')">Test voice</button>
+  <p id="settingsStatus" class="status" role="status"></p>
+ </div>
 </section>
 </main>
-
-<dialog id="details">
-  <button style="float:right" onclick="details.close()">Close ✕</button>
-  <div id="detailContent"></div>
-</dialog>
-
-<footer>ENA v1 · Stories, discoveries and conversations.<br><br>TV information provided by <a href="https://www.tvmaze.com/api" target="_blank" rel="noopener">TVmaze</a> where applicable.</footer>
+<footer>ENA AI · The future starts with ENA · Built by Austin Ngugi<br>IMDb, Rotten Tomatoes and other marks belong to their respective owners.</footer>
 
 <script>
-/* OPTIONAL SUPABASE ACCOUNT SETTINGS.
-   Keep AI API keys out of this file. */
+/* CONFIGURATION
+   Supabase URL and publishable key are safe for browser use when
+   database access is protected by Row Level Security.
+   Never place private OpenAI or OMDb keys in this file.
+*/
 const SUPABASE_URL = "YOUR_SUPABASE_PROJECT_URL";
 const SUPABASE_KEY = "YOUR_SUPABASE_PUBLISHABLE_KEY";
 
-/* Your secure AI endpoint, hosted separately. */
-const CHAT_ENDPOINT = "/.netlify/functions/chat";
+/* Deploy your secure server with /api/chat and /api/search.
+   For a separate backend domain, change API_BASE to its HTTPS URL.
+*/
+const API_BASE = "";
+const supabaseConfigured = SUPABASE_URL.startsWith("https://") &&
+ !SUPABASE_URL.includes("YOUR_SUPABASE") &&
+ !SUPABASE_KEY.includes("YOUR_SUPABASE");
+const db = supabaseConfigured ? window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY) : null;
+const history = [];
+let voices = [];
+const localListKey = "ena-watchlist-v1";
+const settingsKey = "ena-settings-v1";
 
-let db = null, user = null;
-if(window.supabase && SUPABASE_URL.startsWith("https://") &&
-   !SUPABASE_URL.includes("YOUR_") && !SUPABASE_KEY.includes("YOUR_")){
-  db = window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
+function page(id){
+ document.querySelectorAll(".view").forEach(v=>v.classList.toggle("active",v.id===id));
+ window.scrollTo({top:0,behavior:document.getElementById("reducedMotion")?.checked?"auto":"smooth"});
+ if(id==="watchlist")renderWatchlist();
 }
-
-let titles = [];
-let watchlist = JSON.parse(localStorage.getItem("ena_watchlist") || "[]");
-let chatHistory = [];
-
-const $ = id => document.getElementById(id);
-const clean = s => String(s || "").replace(/<[^>]*>/g," ")
-  .replace(/&nbsp;/g," ").replace(/&amp;/g,"&")
-  .replace(/&#39;/g,"'").replace(/&quot;/g,'"')
-  .replace(/\s+/g," ").trim();
-
-function esc(s){
-  return String(s ?? "").replace(/[&<>"']/g,c=>({
-    "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
-  })[c]);
-}
-
-function section(id){
-  ["discover","chat","watchlist","account"].forEach(s=>$(s).classList.toggle("hidden",s!==id));
-  if(id==="watchlist")renderWatchlist();
-  if(id==="account")accountMessage();
-  scrollTo({top:0,behavior:"smooth"});
-}
-
-function status(s){$("status").textContent=s}
-
-function normaliseTV(result){
-  const s=result.show || result;
-  return {
-    id:"tv"+s.id,source:"TVmaze",sourceId:s.id,title:clean(s.name),
-    type:s.type || "TV series",year:s.premiered?.slice(0,4)||"",
-    genres:s.genres||[],summary:clean(s.summary)||"No synopsis available.",
-    image:s.image?.medium||s.image?.original||"",
-    rating:s.rating?.average??null,url:s.url||""
-  };
-}
-
-function normaliseWiki(x){
-  return {
-    id:"wiki"+x.id,source:"Wikidata",sourceId:x.id,title:clean(x.label),
-    type:"Catalogue entry",year:"",genres:[],
-    summary:clean(x.description)||"No description available.",
-    image:"",rating:null,url:"https://www.wikidata.org/wiki/"+encodeURIComponent(x.id)
-  };
-}
-
-async function searchTitles(){
-  const q=$("query").value.trim();
-  if(!q){status("Type a title first.");return}
-  $("results").innerHTML="";
-  status("Searching online catalogues...");
-  const jobs=await Promise.all([
-    fetch("https://api.tvmaze.com/search/shows?q="+encodeURIComponent(q))
-      .then(r=>r.ok?r.json():[]).then(a=>a.map(normaliseTV)).catch(()=>[]),
-    fetch("https://www.wikidata.org/w/api.php?action=wbsearchentities&search="+
-      encodeURIComponent(q)+"&language=en&format=json&limit=15&origin=*")
-      .then(r=>r.ok?r.json():{}).then(d=>(d.search||[]).map(normaliseWiki)).catch(()=>[])
-  ]);
-  const seen=new Set();
-  titles=[...jobs[0],...jobs[1]].filter(x=>{
-    const k=x.title.toLowerCase();
-    if(!k||seen.has(k))return false;
-    seen.add(k);return true;
-  });
-  applyFilters();
-  status(titles.length?"Found "+titles.length+" possible matches.":"No matches found. Try another title.");
-}
-
-function matches(x,c){
-  if(c==="all")return true;
-  const t=(x.title+" "+x.type+" "+x.genres.join(" ")+" "+x.summary).toLowerCase();
-  if(c==="series")return x.source==="TVmaze";
-  if(c==="movie")return /movie|film/.test(t);
-  if(c==="anime")return /anime|manga|japanese animation/.test(t);
-  if(c==="animation")return /animation|animated|cartoon/.test(t);
-  if(c==="documentary")return /documentary|documentaries/.test(t);
-  return true;
-}
-
-$("category").onchange=applyFilters;
-$("sort").onchange=applyFilters;
-
-function applyFilters(){
-  let list=titles.filter(x=>matches(x,$("category").value));
-  if($("sort").value==="year")list.sort((a,b)=>(+b.year||0)-(+a.year||0));
-  if($("sort").value==="rating")list.sort((a,b)=>(b.rating||0)-(a.rating||0));
-  renderResults(list);
-}
-
-async function trending(){
-  status("Loading TV catalogue...");
-  try{
-    const r=await fetch("https://api.tvmaze.com/shows?page=0");
-    if(!r.ok)throw Error();
-    titles=(await r.json()).slice(0,40).map(normaliseTV);
-    applyFilters();
-    status("Explore TV picks from TVmaze. This is not a popularity ranking.");
-  }catch{status("Could not load the catalogue. Check your internet connection.")}
-}
-
-function renderResults(list){
-  const host=$("results");host.innerHTML="";
-  if(!list.length){host.innerHTML='<p class="muted">No results in this category. Try All categories.</p>';return}
-  list.forEach(x=>{
-    const el=document.createElement("article");
-    el.className="card";
-    el.innerHTML=(x.image?
-      '<img class="poster" loading="lazy" alt="Poster" src="'+esc(x.image)+'">':
-      '<div class="placeholder">ENA<br>STORY ARCHIVE</div>')+
-      '<div class="cardbody"><div class="tag">'+esc(x.source)+'</div>'+
-      '<h3>'+esc(x.title)+'</h3>'+
-      '<div><span class="pill">'+(x.rating!=null?"TVmaze rating: "+esc(x.rating)+"/10":"Rating unavailable")+'</span></div>'+
-      '<div class="desc">'+esc(x.year||"Year unavailable")+" · "+esc(x.genres.join(", ")||x.type)+'</div>'+
-      '<div class="desc">'+esc(x.summary.slice(0,145))+'</div>'+
-      '<div class="actions"><button class="primary" data-detail>Details</button><button data-save>＋ Save</button></div></div>';
-    el.querySelector("[data-detail]").onclick=()=>showDetails(x.id);
-    el.querySelector("[data-save]").onclick=()=>toggleWatch(x);
-    host.appendChild(el);
-  });
-}
-
-function findTitle(id){return titles.find(x=>x.id===id)||watchlist.find(x=>x.id===id)}
-
-function toggleWatch(x){
-  if(watchlist.some(y=>y.id===x.id))watchlist=watchlist.filter(y=>y.id!==x.id);
-  else watchlist.push({...x,watched:false});
-  localStorage.setItem("ena_watchlist",JSON.stringify(watchlist));
-  renderWatchlist();
-  status("Your watchlist has been updated.");
-}
-
+function textStatus(id,msg){document.getElementById(id).textContent=msg}
+function promptFor(value){document.getElementById("prompt").value=value;page("chat")}
+function readList(){try{return JSON.parse(localStorage.getItem(localListKey)||"[]")}catch{return []}}
 function renderWatchlist(){
-  const host=$("watchItems");host.innerHTML="";
-  if(!watchlist.length){host.textContent="Your watchlist is empty. Find a story and save it here.";return}
-  watchlist.forEach(x=>{
-    const el=document.createElement("div");el.className="item";
-    el.innerHTML="<h3>"+esc(x.title)+"</h3><p class='muted'>"+esc(x.type)+"</p>"+
-      '<div class="actions"><button data-detail>Details</button><button data-watched>'+
-      (x.watched?"✓ Watched":"Mark watched")+'</button><button data-remove>Remove</button></div>';
-    el.querySelector("[data-detail]").onclick=()=>showDetails(x.id);
-    el.querySelector("[data-watched]").onclick=()=>{
-      x.watched=!x.watched;
-      localStorage.setItem("ena_watchlist",JSON.stringify(watchlist));renderWatchlist();
-    };
-    el.querySelector("[data-remove]").onclick=()=>{
-      watchlist=watchlist.filter(y=>y.id!==x.id);
-      localStorage.setItem("ena_watchlist",JSON.stringify(watchlist));renderWatchlist();
-    };
-    host.appendChild(el);
+ const root=document.getElementById("savedTitles");root.replaceChildren();
+ const list=readList();
+ if(!list.length){root.textContent="Your watchlist is empty. Search a title and save it.";return}
+ list.forEach(item=>{
+  const row=document.createElement("p");row.textContent=item.title+" ("+item.year+") ";
+  const link=document.createElement("a");link.href=item.url;link.target="_blank";link.rel="noopener noreferrer";link.textContent="IMDb page";
+  row.appendChild(link);root.appendChild(row);
+ });
+}
+function saveTitle(movie){
+ const list=readList();
+ if(list.some(x=>x.id===movie.id)){textStatus("searchStatus","Already in your watchlist.");return}
+ list.push(movie);localStorage.setItem(localListKey,JSON.stringify(list));
+ textStatus("searchStatus","Saved to your watchlist.");
+}
+function clearWatchlist(){localStorage.removeItem(localListKey);renderWatchlist()}
+
+async function register(){
+ if(!db)return textStatus("authStatus","Configure Supabase first.");
+ const email=document.getElementById("email").value.trim(),password=document.getElementById("password").value;
+ if(password.length<8)return textStatus("authStatus","Use at least 8 characters for your password.");
+ const {error}=await db.auth.signUp({email,password,options:{emailRedirectTo:location.origin}});
+ textStatus("authStatus",error?error.message:"Registration submitted. Check your email if confirmation is enabled.");
+}
+async function login(){
+ if(!db)return textStatus("authStatus","Configure Supabase first.");
+ const email=document.getElementById("email").value.trim(),password=document.getElementById("password").value;
+ const {error}=await db.auth.signInWithPassword({email,password});
+ textStatus("authStatus",error?error.message:"Signed in.");await updateUser();
+}
+async function logout(){
+ if(!db)return textStatus("authStatus","Configure Supabase first.");
+ const {error}=await db.auth.signOut();textStatus("authStatus",error?error.message:"Signed out.");await updateUser();
+}
+async function social(provider){
+ if(!db)return textStatus("authStatus","Configure Supabase and enable this sign-in provider first.");
+ const {error}=await db.auth.signInWithOAuth({provider,options:{redirectTo:location.origin}});
+ if(error)textStatus("authStatus",error.message);
+}
+async function updateUser(){
+ if(!db){textStatus("userStatus","Supabase is not configured.");return}
+ const {data,error}=await db.auth.getUser();
+ textStatus("userStatus",error?"Unable to check sign-in status.":data.user?"Signed in as "+data.user.email:"Not signed in.");
+}
+if(db)db.auth.onAuthStateChange(()=>updateUser());
+updateUser();
+
+function addMessage(message,role){
+ const bubble=document.createElement("div");bubble.className="bubble "+role;
+ const content=document.createElement("div");content.textContent=message;bubble.appendChild(content);
+ if(role==="assistant"){
+  const read=document.createElement("button");read.textContent="Read aloud";read.onclick=()=>speak(message);bubble.appendChild(read);
+ }
+ const root=document.getElementById("messages");root.appendChild(bubble);bubble.scrollIntoView({block:"nearest"});
+}
+document.getElementById("chatForm").addEventListener("submit",async event=>{
+ event.preventDefault();
+ const field=document.getElementById("prompt"),message=field.value.trim();if(!message)return;
+ field.value="";addMessage(message,"user");textStatus("chatStatus","ENA is thinking...");
+ try{
+  const response=await fetch(API_BASE+"/api/chat",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({message,history})});
+  const data=await response.json();if(!response.ok)throw new Error(data.error||"AI service unavailable.");
+  const reply=data.reply||"No reply received.";
+  history.push({role:"user",content:message},{role:"assistant",content:reply});
+  addMessage(reply,"assistant");textStatus("chatStatus","");
+  if(document.getElementById("autoRead").checked)speak(reply);
+ }catch(error){textStatus("chatStatus",error.message+" Make sure the secure ENA server is running.");}
+});
+
+document.getElementById("searchForm").addEventListener("submit",async event=>{
+ event.preventDefault();const query=document.getElementById("query").value.trim();
+ const root=document.getElementById("results");root.replaceChildren();textStatus("searchStatus","Searching...");
+ try{
+  const response=await fetch(API_BASE+"/api/search?title="+encodeURIComponent(query));
+  const data=await response.json();if(!response.ok)throw new Error(data.error||"Search failed.");
+  if(!data.results?.length){textStatus("searchStatus",data.message||"No titles found.");return}
+  textStatus("searchStatus","Results from the configured provider.");
+  data.results.forEach(movie=>{
+   const card=document.createElement("article");card.className="movie";
+   if(movie.poster){const img=document.createElement("img");img.src=movie.poster;img.alt="Poster for "+movie.title;img.loading="lazy";card.appendChild(img)}
+   const details=document.createElement("div"),title=document.createElement("h3");title.textContent=movie.title+" ("+movie.year+")";details.appendChild(title);
+   const synopsis=document.createElement("p");synopsis.textContent=movie.plot||"Synopsis unavailable.";details.appendChild(synopsis);
+   const imdb=document.createElement("p");imdb.textContent="IMDb: "+(movie.imdbRating&&movie.imdbRating!=="N/A"?movie.imdbRating+"/10":"Not available");details.appendChild(imdb);
+   const rt=document.createElement("p");rt.textContent="Rotten Tomatoes: "+(movie.rottenTomatoes||"Not available");details.appendChild(rt);
+   const link=document.createElement("a");link.href=movie.imdbUrl;link.target="_blank";link.rel="noopener noreferrer";link.textContent="Verify title on IMDb";details.appendChild(link);
+   const save=document.createElement("p"),btn=document.createElement("button");btn.textContent="Save to watchlist";btn.onclick=()=>saveTitle({id:movie.imdbID,title:movie.title,year:movie.year,url:movie.imdbUrl});save.appendChild(btn);details.appendChild(save);
+   card.appendChild(details);root.appendChild(card);
   });
-}
+ }catch(error){textStatus("searchStatus",error.message)}
+});
 
-async function showDetails(id){
-  const x=findTitle(id);if(!x)return;
-  $("detailContent").innerHTML="<div class='eyebrow'>"+esc(x.source)+"</div>"+
-    "<h2>"+esc(x.title)+"</h2><p>"+esc(x.summary)+"</p>"+
-    "<p class='muted'>Year: "+esc(x.year||"Unknown")+" · Type: "+esc(x.type)+"</p>"+
-    "<p>Rating: "+(x.rating!=null?"TVmaze "+esc(x.rating)+"/10":"Not available from this source")+"</p>"+
-    '<div class="actions"><button id="saveDetail" class="primary">＋ Watchlist</button>'+
-    '<button id="findWatch">Find where to watch</button>'+
-    (x.url?'<a href="'+esc(x.url)+'" target="_blank" rel="noopener">Source ↗</a>':"")+
-    '</div><div id="episodes"></div>';
-  $("saveDetail").onclick=()=>toggleWatch(x);
-  $("findWatch").onclick=()=>window.open("https://www.google.com/search?q="+
-    encodeURIComponent(x.title+" where to watch streaming"),"_blank","noopener");
-  if(x.source==="TVmaze"){
-    $("episodes").innerHTML="<p class='muted'>Loading seasons and episodes...</p>";
-    try{
-      const [sr,er]=await Promise.all([
-        fetch("https://api.tvmaze.com/shows/"+x.sourceId+"/seasons"),
-        fetch("https://api.tvmaze.com/shows/"+x.sourceId+"/episodes")
-      ]);
-      if(!sr.ok||!er.ok)throw Error();
-      const [seasons,episodes]=await Promise.all([sr.json(),er.json()]);
-      const host=$("episodes");host.innerHTML="<h2>Seasons and episodes</h2>";
-      if(!episodes.length)host.textContent="No episode information available.";
-      seasons.forEach(s=>{
-        const box=document.createElement("details");
-        box.style.marginBottom="12px";
-        box.innerHTML="<summary>Season "+esc(s.number)+"</summary>";
-        episodes.filter(e=>e.season===s.number).forEach(e=>{
-          const ep=document.createElement("div");ep.className="episode";
-          ep.innerHTML="<strong>S"+esc(e.season)+" E"+esc(e.number)+": "+esc(e.name)+
-            "</strong><p class='muted'>"+esc(e.airdate||"Air date unavailable")+"</p><p>"+
-            esc(clean(e.summary)||"No episode summary available.")+"</p>";
-          box.appendChild(ep);
-        });
-        host.appendChild(box);
-      });
-    }catch{$("episodes").textContent="Season information is temporarily unavailable."}
-  }else $("episodes").textContent="Season guides are available when a series is found in TVmaze.";
-  $("details").showModal();
-}
-
-/* Natural conversational fallback. Real AI requires CHAT_ENDPOINT. */
-function localReply(message){
-  const m=message.toLowerCase();
-  const previous=chatHistory.filter(x=>x.role==="user").length;
-  if(/\b(hi|hello|hey|good morning|good evening|good night)\b/.test(m))
-    return "Hey! 😊 How are you doing? Tell me what's on your mind.";
-  if(/\b(how are you|how're you)\b/.test(m))
-    return "I'm doing well, thank you for asking! I'm here and ready to chat. How about you?";
-  if(/\b(sad|upset|lonely|stressed|tired|bad day|not okay|not ok)\b/.test(m))
-    return "I'm sorry things feel that way right now. ❤️ Want to tell me a little about what's been happening? I'm listening.";
-  if(/\b(happy|excited|great|good day|amazing)\b/.test(m))
-    return "I love that energy! 😊 What's been making your day good?";
-  if(/\b(thank you|thanks)\b/.test(m))
-    return "You're welcome! 😊 What else is on your mind?";
-  if(/\b(movie|film|watch|recommend|series|anime|documentary|cartoon)\b/.test(m)){
-    const q=encodeURIComponent(message);
-    return "Let's find something you'll enjoy. I've got your request. Search the catalogue above for matching titles, or tell me the mood you want: something funny, romantic, mysterious, scary or epic. 🎬";
+document.getElementById("feedbackForm").addEventListener("submit",async event=>{
+ event.preventDefault();
+ const feedback={
+  type:document.getElementById("feedbackType").value,
+  rating:Number(document.getElementById("feedbackRating").value),
+  message:document.getElementById("feedbackText").value.trim(),
+  created_at:new Date().toISOString()
+ };
+ const status=document.getElementById("feedbackStatus");
+ if(!feedback.message)return textStatus("feedbackStatus","Please write your feedback.");
+ try{
+  if(db){
+   const {data:{user}}=await db.auth.getUser();
+   if(!user){
+    textStatus("feedbackStatus","Sign in first so ENA can securely associate your feedback with your account, or configure the feedback email option.");
+    return;
+   }
+   const {error}=await db.from("feedback").insert({
+    user_id:user.id,type:feedback.type,rating:feedback.rating,message:feedback.message
+   });
+   if(error)throw error;
+   status.textContent="Thank you. Your feedback has been saved.";
+   event.target.reset();
+   return;
   }
-  if(/\b(bye|goodbye|see you)\b/.test(m))
-    return "Take care! 😊 Come back whenever you feel like chatting or discovering another story.";
-  if(previous>1)
-    return "I'm listening. Tell me a little more about that. What part matters most to you?";
-  return "I'm here with you. 😊 Tell me more. How does that make you feel?";
-}
+  const email=document.getElementById("feedbackEmail").value.trim();
+  if(!email){
+   textStatus("feedbackStatus","To send feedback, configure Supabase and its feedback table, or enter a support email in Settings.");
+   return;
+  }
+  const subject=encodeURIComponent("ENA AI feedback: "+feedback.type);
+  const body=encodeURIComponent("Rating: "+feedback.rating+"/5\n\n"+feedback.message);
+  location.href="mailto:"+email+"?subject="+subject+"&body="+body;
+  textStatus("feedbackStatus","Your email app should open with the feedback prepared.");
+ }catch(error){textStatus("feedbackStatus","Feedback could not be saved: "+error.message)}
+});
 
-function addMessage(text,who){
-  const el=document.createElement("div");el.className="message "+who;el.textContent=text;
-  $("chatbox").appendChild(el);$("chatbox").scrollTop=$("chatbox").scrollHeight;
+function loadVoices(){
+ if(!("speechSynthesis" in window))return;
+ voices=speechSynthesis.getVoices();const select=document.getElementById("voice");select.replaceChildren();
+ voices.forEach((v,i)=>{const option=document.createElement("option");option.value=i;option.textContent=v.name+" ("+v.lang+")";select.appendChild(option)});
 }
-
-async function sendChat(){
-  const input=$("chatInput"),message=input.value.trim();
-  if(!message)return;
-  input.value="";
-  addMessage(message,"user");
-  chatHistory.push({role:"user",content:message});
-  $("sendButton").disabled=true;
-  const thinking=document.createElement("div");
-  thinking.className="message ena";thinking.textContent="Let me think...";
-  $("chatbox").appendChild(thinking);
-  try{
-    const response=await fetch(CHAT_ENDPOINT,{
-      method:"POST",headers:{"Content-Type":"application/json"},
-      body:JSON.stringify({message,history:chatHistory.slice(-12)})
-    });
-    if(!response.ok)throw Error("AI not configured");
-    const data=await response.json();
-    if(!data.reply)throw Error("No AI reply");
-    thinking.remove();addMessage(data.reply,"ena");
-    chatHistory.push({role:"assistant",content:data.reply});
-  }catch{
-    thinking.remove();
-    const reply=localReply(message);
-    addMessage(reply,"ena");
-    chatHistory.push({role:"assistant",content:reply});
-  }finally{$("sendButton").disabled=false;input.focus()}
+function speak(text){
+ if(!("speechSynthesis" in window)){textStatus("settingsStatus","Read-aloud is not supported in this browser.");return}
+ speechSynthesis.cancel();const utterance=new SpeechSynthesisUtterance(text);
+ const voice=voices[Number(document.getElementById("voice").value)];if(voice)utterance.voice=voice;
+ utterance.rate=Number(document.getElementById("speed").value)||1;speechSynthesis.speak(utterance);
 }
-
-/* Optional Supabase authentication */
-function accountMessage(){
-  $("accountStatus").textContent=db?
-    (user?"Signed in as "+user.email:"Sign in or create an account.") :
-    "Accounts are inactive until you configure Supabase.";
+function stopVoice(){if("speechSynthesis" in window)speechSynthesis.cancel()}
+function saveSettings(){
+ const settings={speed:document.getElementById("speed").value,voice:document.getElementById("voice").value,autoRead:document.getElementById("autoRead").checked,reducedMotion:document.getElementById("reducedMotion").checked,feedbackEmail:document.getElementById("feedbackEmail").value};
+ localStorage.setItem(settingsKey,JSON.stringify(settings));textStatus("settingsStatus","Settings saved on this device.");
 }
-async function signup(){
-  if(!db){accountMessage();return}
-  const {error}=await db.auth.signUp({email:$("email").value.trim(),password:$("password").value});
-  $("accountStatus").textContent=error?error.message:"Check your email if confirmation is enabled.";
+function restoreSettings(){
+ try{
+  const s=JSON.parse(localStorage.getItem(settingsKey)||"{}");
+  if(s.speed)document.getElementById("speed").value=s.speed;
+  if(s.autoRead!==undefined)document.getElementById("autoRead").checked=s.autoRead;
+  if(s.reducedMotion!==undefined)document.getElementById("reducedMotion").checked=s.reducedMotion;
+  if(s.feedbackEmail)document.getElementById("feedbackEmail").value=s.feedbackEmail;
+  if(s.voice!==undefined)document.getElementById("voice").value=s.voice;
+ }catch{}
 }
-async function signin(){
-  if(!db){accountMessage();return}
-  const {data,error}=await db.auth.signInWithPassword({email:$("email").value.trim(),password:$("password").value});
-  if(error){$("accountStatus").textContent=error.message;return}
-  user=data.user;$("accountStatus").textContent="Signed in as "+user.email;
-}
-async function signout(){
-  if(!db){accountMessage();return}
-  const {error}=await db.auth.signOut();
-  user=null;$("accountStatus").textContent=error?error.message:"Signed out.";
-}
-if(db){
-  db.auth.getSession().then(({data})=>{user=data.session?.user||null;accountMessage()});
-  db.auth.onAuthStateChange((_event,session)=>{user=session?.user||null;accountMessage()});
-}
-renderWatchlist();
+if("speechSynthesis" in window){loadVoices();speechSynthesis.onvoiceschanged=loadVoices}
+restoreSettings();
 </script>
 </body>
 </html>
